@@ -1,0 +1,42 @@
+//Seleciona os elementos do formulario
+const form = document.querySelector("form");
+const amount = document.getElementById("amount");
+const expense = document.getElementById("expense");
+const category = document.getElementById("category");
+//CAPTURA O EVENTO DE INPUT PARA FORMATAR O VALOR
+amount.oninput = () => {
+  //Obten o valor atual do input e remove os carasteres não numéricos.
+  let value = amount.value.replace(/\D/g, "");
+
+  //Transforma o valor em centavos
+  value = Number(value) / 100;
+
+  //Atualiza o valor do input.
+  amount.value = formatCurrencyBRL(value);
+};
+
+function formatCurrencyBRL(value) {
+  value = value.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+  return value;
+}
+
+//Captura o valor de submit do fomrulario para obter os valores.
+form.onsubmit = (event) => {
+  //Previne o comportamento padrão de recarregar a página
+  event.preventDefault();
+
+  //Cria um objetos com os detalhes na nova despesa
+  const newExpense = {
+    id: new Date().getTime(),
+    expense: expense.value,
+    category_id: category.value,
+    category_name: category.options[category.selectedIndex].text,
+    amount: amount.value,
+    create_at: new Date(),
+  };
+
+ 
+};
