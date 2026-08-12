@@ -140,6 +140,13 @@ expensesTotal.append(symbolBRL,total)
   } catch (error) {
     console.log(error);
 
-    aletr("Não foi possivel atualizar os totais!");
+    alert("Não foi possivel atualizar os totais!");
   }
 }
+
+expenseList.addEventListener("click",(event)=>{
+  if(event.target.classList.contains("remove-icon")){
+    const item = event.target.closest(".expense")
+    item.remove()
+  }
+})
